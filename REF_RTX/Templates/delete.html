@@ -1,0 +1,15 @@
+{% extends "base_modal.html" %}
+{% block modal %}
+
+<form action="" method="post">
+  <div class="modal-body">
+    {% csrf_token %}
+    {{form.as_p}}
+    <p>Do you want to delete {{Delobject}}?</p>
+  </div>
+  <div class="modal-footer">
+      <a href="javascript:parent.oncomplete()"><input type="Submit" class="btn btn-primary" value="Submit"></a>
+      <a href="javascript:parent.oncancel()" class="btn btn-primary">Cancel</a>
+  </div>
+</form>
+    {% endblock %}

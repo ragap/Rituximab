@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}RTX{% endblock %}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    {% block head %}
+    {% endblock head %}
+  </head>
+  <body>
+
+  {% block bodytitle %}{% endblock bodytitle %}
+  {% block body %}
+  <nav class="navbar navbar-inverse navbar-fixed top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display-->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'index' %}">RTX</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'index' %}">Home</a></li>
+           {% if user.is_authenticated %}
+             <!-- <li>{{ user.username }}</li> -->
+             <li ><a href="{% url 'logout' %}">Logout</a></li>
+           {% else %}
+             <li><a href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+        </ul>
+        </div>
+      </div>
+    </nav>
+
+
+<section style="display:inline-flex;" >
+  <aside style="width:200px; Height : 3500px;">
+    <nav>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="nav nav-sidebar nav-stacked ">
+              <li><a href="{% url 'hospital'  %}" id="hospital">Hospital</a></li>
+              <li><a href="{% url 'doctor'  %}" id="doctor">Doctor</a></li>
+              <li><a href="{% url 'patient'  %}" id="patient">Patient</a></li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+  </aside>
+  <div id="maincontent" style="width:200px;height:250px;">
+         {% block main %}
+         {% endblock main %}
+
+  </div>
+  </section>
+  {% endblock body %}
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- <script src="js/bootstrap.min.js"></script> -->
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body" style="height:400px;">
+          <iframe id='modalframe' src="" width="99.6%" height="90%"></iframe>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+
+  <script type="text/javascript">
+  function oncancel(){
+    location.reload();
+  }
+
+  function oncomplete(){
+    $("#myModal").modal('hide');
+    location.reload();
+  }
+
+
+  </script>
+</html>

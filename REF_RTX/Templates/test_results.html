@@ -1,0 +1,80 @@
+{% extends "index.html" %}
+{% block main %}
+
+  <div class="container">
+    <form class="navbar-form navbar-left">
+        <div class="form-group">
+             <input type="text" class="form-control" placeholder="Search">
+        </div>
+           <button type="submit" class="btn btn-primary">Search</button>
+           <!-- <a href="javascript:addinfusion()" class="btn btn-primary">Create</a> -->
+           <a href="javascript:addresults()" class="btn btn-primary">Create</a>
+
+  </div>
+  <div class="container">
+      <h1>Infusion Test result details </h1>
+      <table class = "table table-bordered table-hover" >
+        <thead class="thead-inverse">
+          <tr>
+            <th>Infusion Type</th>
+            <th>CD19</th>
+            <th>UPCR</th>
+            <th>Serum albumin</th>
+            <th>Creatinine</th>
+            <th>CRP</th>
+            <th>ESR</th>
+            <th>ANCA</th>
+            <th>PR3</th>
+            <th>MPO</th>
+            <th>Urine RBC</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+          {% for i in results %}
+           <tr>
+           <td>{{i.type}}</td>
+           <td>{{i.cd19_abs_count}}</td>
+           <td>{{i.upcr}}</td>
+           <td>{{i.serum_albumin}}</td>
+           <td>{{i.creatinine}}</td>
+           <td>{{i.CRP}}</td>
+           <td>{{i.ESR}}</td>
+           <td>{{i.ANCA_titre}}</td>
+           <td>{{i.PR3_titre}}</td>
+           <td>{{i.MPO_titre}}</td>
+           <td>{{i.urine_rbc}}</td>
+           <td>
+             <a href="javascript:editresults({{i.id}})"><span class="glyphicon glyphicon-pencil" ></span></a>
+           </td>
+           <td>
+              <a href="javascript:delresults({{i.id}})"><span class="glyphicon glyphicon-trash"></span></a>
+           </td>
+           </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+
+  <script>
+
+    function addresults()
+    {
+        $("#modalframe").attr("src","/rtx/patient/infusion/{{infusion_id}}/results/add/")
+        $("#myModal").modal({show:true});
+    }
+
+    function delresults(id)
+    {
+       $("#modalframe").attr("src","/rtx/patient/infusion/" + id + "/results/delete/" )
+       $("#myModal").modal({show:true})
+    }
+
+    function editresults(id)
+    {
+       $("#modalframe").attr("src","/rtx/patient/infusion/" + id + "/results/edit/" )
+       $("#myModal").modal({show:true})
+    }
+  </script>
+{% endblock %}

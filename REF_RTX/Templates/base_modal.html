@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="/static/admin/css/global.css"/> -->
+    <!-- <link rel="stylesheet" type="text/css" href="/static/admin/css/widgets.css"/> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script
+     src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"
+     integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
+     crossorigin="anonymous"></script>
+    <!-- <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <script type="text/javascript" src="/static/admin/js/core.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script> -->
+    {{form.media}}
+  </head>
+  <style>
+ #formenter p {
+    margin: 0 0 10px;
+ }
+ #formenter p > input[type=file] {
+    padding-left: 0px;
+ }
+ </style>
+  <body>
+    <div class="modal-body" id="myModal">
+      {% block modal %}
+      {% endblock modal %}
+    </div>
+  </body>
+
+ <script>
+    /*$(document).ready(function() */
+
+    $("#formenter p").addClass("row");
+    $("#formenter p > label").addClass("col-xs-4 col-sm-4 col-md-4");
+    $("#formenter p > input").addClass("col-xs-8 col-sm-8 col-md-8");
+
+
+ </script>
+
+</html>

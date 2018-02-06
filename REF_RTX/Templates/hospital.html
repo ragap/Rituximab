@@ -1,0 +1,66 @@
+{% extends "index.html" %}
+{% block main %}
+
+  <div class="container">
+    <!-- <form class="navbar-form navbar-left" method ="post"> -->
+        <!-- {% csrf_token %}
+        <div class="form-group">
+             <input type="text" class="form-control" placeholder="Search">
+        </div>
+           <button type="submit" class="btn btn-primary">Search</button> -->
+           <a href="javascript:addhospital()" class="btn btn-primary">Create</a>
+           <!-- <a href="{% url 'add_hospital'  %}" class="btn btn-primary">Create</a> -->
+
+
+  </div>
+  <div class="container">
+       <h1>Hospitals</h1>
+      <table class = "table table-bordered table-hover" >
+        <thead class="thead-inverse">
+          <tr>
+            <th>Hospital Name</th>
+            <th>City</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in hospitals %}
+           <tr >
+           <td>{{i.hospital_name}}</td>
+           <td>{{i.city}}</td>
+            <td>
+              <a href="javascript:edithospital({{i.id}})"><span class="glyphicon glyphicon-pencil" ></span></a>
+           </td>
+           <td>
+               <a href="javascript:delhospital({{i.id}})" ><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
+           </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+
+  <script>
+
+    function addhospital()
+    {
+        $("#modalframe").attr("src","/rtx/hospital/add/")
+        $("#myModal").modal({show:true});
+    }
+
+    function delhospital(id)
+    {
+       $("#modalframe").attr("src","/rtx/hospital/" + id + "/delete/" )
+       $("#myModal").modal({show:true})
+    }
+
+    function edithospital(id)
+    {
+       $("#modalframe").attr("src","/rtx/hospital/" + id + "/edit/" )
+       $("#myModal").modal({show:true})
+    }
+
+  </script>
+
+{% endblock %}

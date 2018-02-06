@@ -1,0 +1,65 @@
+{% extends "index.html" %}
+{% block main %}
+
+<div class="container">
+  <!-- <form class="navbar-form navbar-left">
+      <div class="form-group">
+           <input type="text" class="form-control" placeholder="Search">
+      </div>
+         <button type="submit" class="btn btn-primary">Search</button> -->
+         <a href="javascript:adddoctor()" class="btn btn-primary">Create</a>
+  </div>
+   <div class="container">
+       <h1>Doctors</h1>
+     <table class = "table table-bordered table-hover" >
+       <thead class="thead-inverse">
+       <tr>
+         <th>Doctor Name</th>
+         <th>Email</th>
+         <th>Hospital</th>
+         <th>Edit</th>
+         <th>Delete</th>
+       </tr>
+       </thead>
+         <tbody>
+          {% for i in doctor %}
+           <tr>
+           <td>{{i.doctor_name}}</td>
+           <td>{{i.doctor_email}}</td>
+           <td>{{i.Hospital}}</td>
+            <td>
+              <a href="javascript:editdoctor({{i.id}})"><span class="glyphicon glyphicon-pencil" ></span></a>
+           </td>
+           <td>
+               <a href="javascript:deldoctor({{i.id}})"><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
+           </tr>
+          {% endfor %}
+          </tbody>
+     </table>
+   </div>
+</div>
+
+<script>
+
+  function adddoctor()
+  {
+      $("#modalframe").attr("src","/rtx/doctor/add/")
+      $("#myModal").modal({show:true});
+  }
+
+  function deldoctor(id)
+  {
+     $("#modalframe").attr("src","/rtx/doctor/" + id + "/delete/" )
+     $("#myModal").modal({show:true})
+  }
+
+  function editdoctor(id)
+  {
+     $("#modalframe").attr("src","/rtx/doctor/" + id + "/edit/" )
+     $("#myModal").modal({show:true})
+  }
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+ {% extends "base_modal.html" %}
+{% block modal %}
+      <form class="" action="" method="POST" id="formenter">
+      <div class="modal-body">
+        {% csrf_token %}
+        {{form.as_p}}
+      </div>
+      <div class="modal-footer">
+        <input type="Submit" class="btn btn-primary" value="Update">
+        <a href="javascript:parent.oncancel()" class="btn btn-primary">Cancel</a>
+      </div>
+    </form>
+    
+    <script type="text/javascript">
+    function subtype_filter(){
+      var $sel = $('select[name="Diagnosis_subtype"]'),
+          dignosis_select = $('select[name="Diagnosis_type"]')
+          val = dignosis_select.val(),
+          campus = $('option:selected', dignosis_select).text();
+          $('optgroup, optgroup > option', $sel).hide();
+          $('optgroup[label="' + campus + '"]', $sel).show();
+          $('optgroup[label="' + campus + '"]', $sel).children().each(function(subtype){$(this).show()});
+    }
+
+        //$(function () {
+            $("#id_Previous_treatment_7").click(function () {
+
+                if(!$(this).is(":checked")){
+                    $("#id_pre_rtx_date").attr("disabled", "disabled");
+                    $("#id_pre_rtx_comment").attr("disabled", "disabled");
+                }
+                else{
+                  $("#id_pre_rtx_date").removeAttr("disabled");
+                  $("#id_pre_rtx_comment").removeAttr("disabled");
+                  $("#id_pre_rtx_comment").focus();
+                }
+            });
+
+            $("#id_Previous_treatment_8").click(function () {
+                if($(this).is(":checked")){
+                  $("#id_prev_other_comment").removeAttr("disabled");
+                  $("#id_prev_other_comment").focus();
+                }
+                else{
+                    $("#id_prev_other_comment").attr("disabled", "disabled");
+                }
+            });
+
+
+
+
+    $( document ).ready(function()
+    {
+      subtype_filter();
+      $('select[name="Diagnosis_type"]').change(subtype_filter);
+      $("#id_pre_rtx_date").attr("disabled", "disabled");
+      $('#id_prev_other_comment').attr('disabled', 'disabled');
+      $('#id_pre_rtx_comment').attr('disabled', 'disabled');
+
+     //Add Calender to Date fields  //
+      $("#id_DOB").datepicker();
+      $("#id_date_of_diagnosis").datepicker();
+      $("#id_pre_rtx_date").datepicker();
+
+    });
+
+
+    </script>
+  {% endblock %}

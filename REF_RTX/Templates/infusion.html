@@ -1,0 +1,77 @@
+{% extends "index.html" %}
+{% block main %}
+
+  <div class="container">
+    <form class="navbar-form navbar-left">
+        <div class="form-group">
+             <input type="text" class="form-control" placeholder="Search">
+        </div>
+           <button type="submit" class="btn btn-primary">Search</button>
+           <!-- <a href="javascript:addinfusion()" class="btn btn-primary">Create</a> -->
+           <a href="javascript:addinfusion()" class="btn btn-primary">Create</a>
+
+  </div>
+  <div class="container">
+      <h1>Infusion Details for {{patient.first_name }} {{ patient.last_name}} </h1>
+      <table class = "table table-bordered table-hover" >
+        <thead class="thead-inverse">
+          <tr>
+            <th>Infusion No</th>
+            <th>Infusion Date</th>
+            <th>Dose in mg</th>
+            <th>Concomitant IS</th>
+            <th>Test Results</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in infusion %}
+           <tr >
+           <td>{{i.no_of_infusion}}</td>
+           <td>{{i.date_of_infusion}}</td>
+           <td>{{i.dose_in_mg}}</td>
+           <td>{{i.concomitant_immunosuppression}}</td>
+           <td>
+             <a href="{% url 'test_results' i.id %}"><span class="glyphicon glyphicon-folder-open"></span></a>
+           </td>
+            <td>
+              <a href="javascript:editinfusion({{i.id}})"><span class="glyphicon glyphicon-pencil" ></span></a>
+           </td>
+           <td>
+               <a href="javascript:delinfusion({{i.id}})" ><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
+           </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+
+  <script>
+
+  function search()
+  {
+
+  }
+
+    function addinfusion()
+    {
+        $("#modalframe").attr("src","/rtx/patient/infusion/{{patient.id}}/add/")
+        $("#myModal").modal({show:true});
+    }
+
+    function delinfusion(id)
+    {
+       $("#modalframe").attr("src","/rtx/patient/infusion/" + id + "/delete/" )
+       $("#myModal").modal({show:true})
+    }
+
+    function editinfusion(id)
+    {
+       $("#modalframe").attr("src","/rtx/patient/infusion/" + id + "/edit/" )
+       $("#myModal").modal({show:true})
+    }
+
+  </script>
+
+{% endblock %}

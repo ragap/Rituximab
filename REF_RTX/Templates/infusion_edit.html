@@ -1,0 +1,14 @@
+{% extends "base_modal.html" %}
+{% block modal %}
+      <form class="" action="" method="post" id="formenter">
+      <div class="modal-body">
+        {% csrf_token %}
+        {{form.as_p}}
+      </div>
+      <div class="modal-footer">
+        <input type="Submit" class="btn btn-primary" value="Update">
+        <a href="javascript:parent.oncancel()" class="btn btn-primary">Cancel</a>
+      </div>
+    </form>
+
+  {% endblock %}

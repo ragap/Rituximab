@@ -1,0 +1,78 @@
+{% extends "index.html" %}
+{% block main %}
+<div class="container">
+  <form class="navbar-form navbar-left" action="{%  url 'search_patient' %}">
+      <div class="form-group .btn-group">
+           <input name="q" type="text" class="form-control" placeholder="Search">
+            <input type="Submit" name ="Search" class="btn btn-primary"/>
+        <!-- </div> -->
+    </form>
+        <!-- <div class=".btn-group"> -->
+         <a href="javascript:addpatient()" class="btn btn-primary">Create</a>
+         <a href="{%  url 'export_csv' %}" class="btn btn-primary">Export</a>
+        </div>
+  </div>
+  <div class="container">
+    <h1>Patients</h1>
+    <table class = "table table-bordered table-hover">
+      <tr>
+        <th>UMRN</th>
+        <th>Name</th>
+        <th>DOB</th>
+        <th>Gender</th>
+        <th>Diagnosis Date</th>
+        <th>Diagnosis Type</th>
+        <th>Diagnosis Subtype</th>
+        <th>Previous Treatment</th>
+        <th>Doctor</th>
+        <th>RTX</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+         {% for i in patient %}
+          <tr>
+            <td>{{i.UMRN}}</td>
+            <td><a href="">{{i.first_name}}  {{i.last_name }}</a></td>
+            <td>{{i.DOB}}</td>
+            <td>{{i.gender}}</td>
+            <td>{{i.date_of_diagnosis}}</td>
+            <td>{{i.Diagnosis_type}}</td>
+            <td>{{i.Diagnosis_subtype}}</td>
+            <td>{{i.Previous_treatment}}</td>
+            <td>{{i.doctor}}</td>
+            <td>
+              <a href="{% url 'infusion' i.id %}"><span class="glyphicon glyphicon-folder-open"></span></a>
+            </td>
+            <td>
+              <a href="javascript:editpatient({{i.id}})"><span class="glyphicon glyphicon-pencil" ></span></a>
+            </td>
+            <td>
+               <a href="javascript:delpatient({{i.id}})"><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
+          </tr>
+         {% endfor %}
+    </table>
+
+    <script>
+
+      function addpatient()
+      {
+          $("#modalframe").attr("src","/rtx/patient/add/")
+          $("#myModal").modal({show:true});
+      }
+
+      function delpatient(id)
+      {
+         $("#modalframe").attr("src","/rtx/patient/" + id + "/delete/" )
+         $("#myModal").modal({show:true})
+      }
+
+      function editpatient(id)
+      {
+         $("#modalframe").attr("src","/rtx/patient/" + id + "/edit/" )
+         $("#myModal").modal({show:true})
+      }
+
+
+    </script>
+    {% endblock %}
